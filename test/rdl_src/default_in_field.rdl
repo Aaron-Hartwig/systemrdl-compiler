@@ -1,0 +1,34 @@
+
+//------------------------------------------------------------------------------
+// Fixtures for the DEFAULT_IN_FIELD warning/error check.
+//
+// A 'default' property assignment inside a field's body has nothing to
+// propagate to (fields cannot contain child components) and is silently
+// discarded. When the DEFAULT_IN_FIELD check is enabled, this likely mistake
+// is flagged as a warning (or error).
+//
+// The legitimate reg-scope 'default' counter-example lives in its own file
+// (default_in_reg_scope.rdl) so it can be compiled without these offending
+// addrmaps present.
+//------------------------------------------------------------------------------
+
+// A 'default' (normal property assignment form) inside a field body.
+// The 'default name' assignment is discarded, so f1 keeps its instance name.
+addrmap default_in_field {
+    reg {
+        field {
+            default name = "should not apply";
+        } f1;
+        field {} f2;
+    } some_reg;
+};
+
+// A 'default' with an interrupt property-modifier form inside a field body.
+// This exercises the prop_mod_assign branch of the check.
+addrmap default_prop_mod_in_field {
+    reg {
+        field {
+            default level intr;
+        } f1;
+    } some_reg;
+};

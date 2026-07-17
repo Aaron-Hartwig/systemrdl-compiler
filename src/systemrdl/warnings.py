@@ -35,6 +35,13 @@ STRICT_SELF_ALIGN = 1<<4
 #: not tightly packed. (IP-XACT, UVM Virtual registers, C arrays, etc..)
 SPARSE_REG_STRIDE = 1<<5
 
+#: Check if a ``default`` property assignment is specified inside a field's body.
+#:
+#: Since fields cannot contain child components, such a ``default`` assignment
+#: has nothing to propagate to and is silently discarded. This check flags the
+#: likely mistake.
+DEFAULT_IN_FIELD = 1<<6
+
 #-------------------------------------------------------------------------------
 #: Enable all warnings.
 ALL = (
@@ -44,4 +51,5 @@ ALL = (
     | STRIDE_NOT_POW2
     | STRICT_SELF_ALIGN
     | SPARSE_REG_STRIDE
+    | DEFAULT_IN_FIELD
 )

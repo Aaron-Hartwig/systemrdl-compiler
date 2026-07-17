@@ -480,6 +480,7 @@ class RDLEnvironment:
         self.chk_stride_not_pow2 = self.chk_flag_severity(warnings.STRIDE_NOT_POW2, w_flags, e_flags)
         self.chk_strict_self_align = self.chk_flag_severity(warnings.STRICT_SELF_ALIGN, w_flags, e_flags)
         self.chk_sparse_reg_stride = self.chk_flag_severity(warnings.SPARSE_REG_STRIDE, w_flags, e_flags)
+        self.chk_default_in_field = self.chk_flag_severity(warnings.DEFAULT_IN_FIELD, w_flags, e_flags)
 
         self.msg = messages.MessageHandler(message_printer)
         self.property_rules = PropertyRuleBook(self)

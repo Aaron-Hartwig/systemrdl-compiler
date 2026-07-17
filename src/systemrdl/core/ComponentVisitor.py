@@ -579,6 +579,17 @@ class ComponentVisitor(BaseVisitor):
 
         default = ctx.DEFAULT_kw() is not None
 
+        if default and isinstance(self.component, comp.Field):
+            self.msg.message(
+                self.compiler.env.chk_default_in_field,
+                "'default' property assignment has no effect inside a "
+                "field's body since fields cannot contain child components. "
+                "This assignment will be discarded. Did you mean to remove "
+                "the 'default' keyword, or move this assignment to the "
+                "enclosing scope?",
+                src_ref_from_antlr(ctx.DEFAULT_kw())
+            )
+
         if ctx.normal_prop_assign() is not None:
             prop_src_ref, prop_name, rhs = self.visit(ctx.normal_prop_assign())
         elif ctx.encode_prop_assign() is not None:

@@ -1,0 +1,20 @@
+
+//------------------------------------------------------------------------------
+// Counter-example for the DEFAULT_IN_FIELD check.
+//
+// A 'default' at the reg scope (NOT inside a field) is the legitimate,
+// intended use. It must never be flagged, and must still propagate to child
+// fields that do not override it.
+//
+// Kept in its own file so it can be compiled in isolation, free of any
+// field-body 'default' assignments that would otherwise trip the check during
+// compilation.
+//------------------------------------------------------------------------------
+
+addrmap default_in_reg_scope {
+    reg {
+        default woclr = true;
+        field {} f1;
+        field {} f2;
+    } some_reg;
+};
